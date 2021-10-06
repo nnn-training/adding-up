@@ -57,9 +57,9 @@ rl.on('close', () => {
     });
 
     // 綺麗に整形する
-    const rankingStrings = rankingArray.map(([key, value]) => {
+    const rankingStrings = rankingArray.map(([key, value], i) => {
         return (
-            key + ': ' + value.popu10 + '=>' + value.popu15 + ' 変化率:' + value.change
+            (i + 1) + '位 ' + key + ': ' + value.popu10 + '=>' + value.popu15 + ' 変化率:' + value.change
         );
     })
 
