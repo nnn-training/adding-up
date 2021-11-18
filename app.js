@@ -37,10 +37,11 @@ rl.on('close', () => {
             val.change = val.pop15 / val.pop10;
     }
     const changeOrderArray = Array.from(prefDataMap).sort((pref1, pref2) => {
-        return pref2[1].change - pref1[1].change;
+        return pref1[1].change - pref2[1].change;
     });
-    const rankingStrings = changeOrderArray.map(([key, value]) => {
+    const rankingStrings = changeOrderArray.map(([key, value], index) => {
         return (
+            `[${index + 1}位]` +
             key +
             ': ' +
             value.pop10 +
