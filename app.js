@@ -40,12 +40,12 @@ rl.on('close', () => {
     }
     //console.log(prefectureDataMap);
     const rankingArray = Array.from(prefectureDataMap).sort((pair1, pair2) => {
-        return pair2[1].change - pair1[1].change;
+        return pair1[1].change - pair2[1].change;
     });
     //console.log(rankingArray);
-    const rankingStrings = rankingArray.map(([key, value]) => {
+    const rankingStrings = rankingArray.map(([key, value], i) => {
         return (
-            `${key}: ${value.popu10} => ${value.popu15} 変化率: ${value.change}`
+            `${key}: ${value.popu10} => ${value.popu15} 変化率: ${value.change} 順位: ${i+1}`
         );
     });
     console.log(rankingStrings);
