@@ -37,10 +37,11 @@ rl.on('close', () => {
   //Array.from( )でMapを配列に変換
   const rankingArr = Array.from(prefDataMap).sort((pair1, pair2) => {
     //降順に並び変える
-    return pair2[1].change - pair1[1].change;
+    // return pair2[1].change - pair1[1].change;
+    return pair1[1].change - pair2[1].change;
   });
-  const rankingStrings = rankingArr.map(([key, value]) => {
-    return `${key}: ${value.popu10}=>${value.popu15}　変化率: ${value.change}`;
+  const rankingStrings = rankingArr.map(([key, value], i) => {
+    return `第${i + 1}位　${key}　変化率: ${value.change}`;
   });
   console.log(rankingStrings);
 });
