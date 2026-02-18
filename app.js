@@ -1,7 +1,7 @@
 'use strict';
 const fs = require('node:fs');
 const readline = require('node:readline');
-const rs =fs.createReadStream('./popu-pref.csv');
+const rs = fs.createReadStream('./popu-pref.csv');
 const rl = readline.createInterface({ input: rs });
 const prefectureDataMap = new Map(); // キー：都道府県に設定 値：集計データのオブジェクト
 
@@ -18,7 +18,7 @@ rl.on('line', lineString => {
     } else {
       value = {
         before: 0,
-        after : 0,
+        after: 0,
         change: null
       }
     }
@@ -35,11 +35,12 @@ rl.on('close', () => {
   for (const [key, value] of prefectureDataMap) {
     value.change = value.after / value.before
   }
-  const rankingArray = Array.from(prefectureDataMap).sort((pair1, pair2) => {
+  const rankingArray = Array.from(prefectureDataMap).sort((pair2, pair1) => {
     return pair2[1].change - pair1[1].change;
   });
-  const rankingString = rankingArray.map(([key, value]) => {
-    return `${key}: ${value.before}=>${value.after} 変化率: ${value.change}`;
-  })
+  const rankingString = rankingArray.map(([key, value], index) => {
+    const rank = index + 1;
+    return `${rank}位 ${key}: ${value.before}=>${value.after} 変化率: ${value.change}`;
+  });
   console.log(rankingString);
 });
